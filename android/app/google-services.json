@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1092948937181",
+    "firebase_url": "https://likefan-649c6.firebaseio.com",
+    "project_id": "likefan-649c6",
+    "storage_bucket": "likefan-649c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092948937181:android:9473898b1b28035c3d4e34",
+        "android_client_info": {
+          "package_name": "com.droemobile.likefan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092948937181-n7nrqqnuq1h43rt7jjus54jk1m2633k4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.droemobile.likefan",
+            "certificate_hash": "a72e8766c91cd7f254580f9ab95d422f6388c312"
+          }
+        },
+        {
+          "client_id": "1092948937181-rt7jebrhrg7rtocp6nvnqqalq3s4g4g5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.droemobile.likefan",
+            "certificate_hash": "7e67ec81eb6e4ec795ddb9eae99cb05998b10cbc"
+          }
+        },
+        {
+          "client_id": "1092948937181-0klammhs0539em8mhgsld9nhrk0lgfm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMsAU0g42gz46995Pw0tHkbz5E6Yyww9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092948937181-0klammhs0539em8mhgsld9nhrk0lgfm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
