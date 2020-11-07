@@ -109,31 +109,35 @@ class _DashboardState extends State<Dashboard> {
       itemBuilder: (BuildContext context, int index) {
         return values.isNotEmpty
             ? Container(
-          color: Colors.orange,
-          padding: EdgeInsets.all(12),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  alertDialog(
-                      context,
-                      values[index].urun_adi,
-                      values[index].baslik,
-                      values[index].girilecekVeri,
-                      values[index].odenecek_kredi);
-                  debugPrint("Tab");
-                },
-                child: Paketler(
-                  baslik: values[index].baslik.toString(),
-                  altBaslik: values[index].alt_baslik,
-                  krediDegeri: values[index].urun_degeri,
-                  renk: Colors.deepOrange,
-                  bosluk: 12,
+                color: Colors.lightBlue,
+                padding: EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        alertDialog(
+                            context,
+                            values[index].urun_adi,
+                            values[index].baslik,
+                            values[index].girilecekVeri,
+                            values[index].odenecek_kredi);
+                        debugPrint("Tab");
+                      },
+                      child: Paketler(
+                        baslik: values[index].baslik.toString(),
+                        altBaslik: values[index].alt_baslik,
+                        krediDegeri: values[index].urun_degeri,
+                        renk: Colors.white,
+                        bosluk: 12,
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        )
+              )
             : CircularProgressIndicator();
       },
     );
@@ -148,7 +152,7 @@ class _DashboardState extends State<Dashboard> {
       itemCount: values == null ? 0 : values.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          color: Colors.blue.shade400,
+          color: Colors.lightBlue,
           padding: EdgeInsets.all(12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -167,8 +171,12 @@ class _DashboardState extends State<Dashboard> {
                   baslik: values[index].baslik.toString(),
                   altBaslik: values[index].alt_baslik,
                   krediDegeri: values[index].urun_degeri,
-                  renk: Colors.lightBlueAccent,
+                  renk: Colors.white,
                   bosluk: 12,
+                  icon: Icon(
+                    Icons.stars,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -186,7 +194,7 @@ class _DashboardState extends State<Dashboard> {
       itemCount: values == null ? 0 : values.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          color: Colors.purpleAccent,
+          color: Colors.lightBlue,
           padding: EdgeInsets.all(12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -205,8 +213,12 @@ class _DashboardState extends State<Dashboard> {
                   baslik: values[index].baslik.toString(),
                   altBaslik: values[index].alt_baslik,
                   krediDegeri: values[index].urun_degeri,
-                  renk: Colors.purple,
+                  renk: Colors.white,
                   bosluk: 12,
+                  icon: Icon(
+                    Icons.account_balance,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -223,54 +235,91 @@ class _DashboardState extends State<Dashboard> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 1000,
+            height: MediaQuery.of(context).size.height,
             //height: MediaQuery.of(context).size.height,
             child: Column(children: [
               Container(
                   alignment: Alignment.bottomLeft,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent,
+                    color: Color.fromARGB(255, 0, 47, 95),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 4.00),
+                    child: Column(
                       children: [
-                        CircleAvatar(
-                            radius: 30,
-                            child: Image.network(widget._kullanici.photoURL)),
-                        Column(
+                        Row(
                           children: [
-                            RaisedButton(onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                                return Siparislerim(widget._kullanici);
-                              }
 
-                              ));
-                            },),
-                            Text(
-                              "Hoşgeldiniz,",
-                              style:
-                              TextStyle(color: Colors.white, fontSize: 18),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 15,
+                                    child: Image.network(widget._kullanici.photoURL,width: 15,),),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Text(
+                                      widget._kullanici.displayName,
+                                      style:
+                                      TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              IconButton(
+                                onPressed: (){
+                                  logout();
+                                },
+                                icon: Icon(Icons.exit_to_app,color: Colors.red,),),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+
+                            Column(
+                              children: [
+                                RaisedButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return Siparislerim(widget._kullanici);
+                                        }));
+                                  },
+                                  color: Colors.lightGreen,
+                                  child: Text("Siparişlerim"),
+                                ),
+                              ],
                             ),
-                            Text(
-                              widget._kullanici.displayName,
-                              style:
-                              TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              "Bakiye: " + widget._kredi.toString(),
-                              style:
-                              TextStyle(color: Colors.white, fontSize: 18),
+
+                            Column(
+                              children: [
+
+
+
+                                Column(
+                                  children: [
+                                    Text(
+                                      widget._kredi.toString(),
+                                      style:
+                                          TextStyle(color: Colors.white, fontSize: 36),
+                                    ),
+                                    Text("Krediniz var.",style: TextStyle(color: Colors.grey),)
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.exit_to_app),
-                          onPressed: () {
-                            logout();
-                          },
                         ),
                       ],
                     ),
@@ -278,18 +327,18 @@ class _DashboardState extends State<Dashboard> {
               Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.green,
+                  color: Colors.blueAccent,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Kredi Satın Al",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold),
                     ),
                   )),
               Container(
-                height: 250,
+                height: 170,
                 child: Container(
-                  color: Colors.green,
+                  color: Colors.lightBlue,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -298,12 +347,12 @@ class _DashboardState extends State<Dashboard> {
                           borderRadius: BorderRadius.circular(50),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: RaisedButton(
                             color: Colors.white60,
                             onPressed: _besbinkredi,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(6.0),
                               child: Container(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -311,14 +360,14 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "100",
                                       style: TextStyle(
-                                          fontSize: 28,
+                                          fontSize: 18,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       "KREDİ",
                                       style: TextStyle(
-                                          fontSize: 20, color: Colors.white),
+                                          fontSize: 18, color: Colors.white),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
@@ -333,32 +382,30 @@ class _DashboardState extends State<Dashboard> {
                                     besbinkrediParasi2misli == null
                                         ? CircularProgressIndicator()
                                         : Text(
-                                      besbinkrediParasi2misli + " TL",
-                                      style: TextStyle(
-                                          decoration:
-                                          TextDecoration.lineThrough,
-                                          fontSize: 14,
-                                          color: Colors.white),
-                                    ),
+                                            besbinkrediParasi2misli + " TL",
+                                            style: TextStyle(
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                fontSize: 14,
+                                                color: Colors.white),
+                                          ),
                                     besbinkrediParasi == null
                                         ? CircularProgressIndicator()
                                         : Text(
-                                      besbinkrediParasi.toString() +
-                                          " TL",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18),
-                                    ),
+                                            besbinkrediParasi.toString() +
+                                                " TL",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
                                     SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                      height: 10,
+                                      height: 2,
                                     ),
                                     Card(
                                       color: Colors.green,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
                                         child: Text(
                                           "Satın Al",
                                           style: TextStyle(
@@ -381,10 +428,13 @@ class _DashboardState extends State<Dashboard> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 alignment: Alignment.center,
-                color: Colors.blue,
-                child: Text(
-                  "Beğeni Paketleri",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+                color: Colors.blueAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Takipçi Paketleri",
+                    style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               Expanded(
@@ -398,10 +448,13 @@ class _DashboardState extends State<Dashboard> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 alignment: Alignment.center,
-                color: Colors.deepOrange,
-                child: Text(
-                  "Takipçi Paketleri",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+                color: Colors.blueAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Gönderi Görüntüleme Paketleri",
+                    style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               Expanded(
@@ -415,10 +468,13 @@ class _DashboardState extends State<Dashboard> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 alignment: Alignment.center,
-                color: Colors.purple,
-                child: Text(
-                  "Gönderi Beğenme Paketleri",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+                color: Colors.blueAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Hikaye Görüntüleme Paketleri",
+                    style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               Expanded(
@@ -474,46 +530,50 @@ class _DashboardState extends State<Dashboard> {
             ),
             widget._kredi < odenecek_kredi
                 ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.warning,
-                    color: Colors.red,
-                  ),
-                  Text(
-                    "Krediniz Yetersiz",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ],
-              ),
-            )
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.warning,
+                          color: Colors.red,
+                        ),
+                        Text(
+                          "Krediniz Yetersiz",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  )
                 : RaisedButton(
-              color: Colors.blue,
-              child: widget._kredi < odenecek_kredi
-                  ? Text("Krediniz Yetersiz")
-                  : Text("Siparişi Yolla"),
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  siparisYolla(baslik, gonderilenDeger, odenecek_kredi, urun_adi);
-                  final snackBar = SnackBar(
-                    content: Text(
-                        'Siparişiniz alındı çok yakında işleme alınacaktır.'),
-                    backgroundColor: Colors.green,
-                  );
+                    color: Colors.blue,
+                    child: widget._kredi < odenecek_kredi
+                        ? Text("Krediniz Yetersiz")
+                        : Text("Siparişi Yolla"),
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        siparisYolla(
+                            baslik, gonderilenDeger, odenecek_kredi, urun_adi);
+                        final snackBar = SnackBar(
+                          content: Text(
+                              'Siparişiniz alındı çok yakında işleme alınacaktır.'),
+                          backgroundColor: Colors.green,
+                        );
 
-                  Scaffold.of(context).showSnackBar(snackBar);
-                  Navigator.pop(context);
-                }
-              },
-            ),
+                        Scaffold.of(context).showSnackBar(snackBar);
+                        Navigator.pop(context);
+                      }
+                    },
+                  ),
             RaisedButton(
               color: Colors.red,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("İptal", style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "İptal",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -536,7 +596,7 @@ class _DashboardState extends State<Dashboard> {
     if (!available) {
       Fluttertoast.showToast(
         msg:
-        "Maalesef satın alma aktif değil. Daha sonra tekrar deneyebilirsiniz.",
+            "Maalesef satın alma aktif değil. Daha sonra tekrar deneyebilirsiniz.",
         toastLength: Toast.LENGTH_LONG,
         timeInSecForIosWeb: 3,
       );
@@ -546,11 +606,11 @@ class _DashboardState extends State<Dashboard> {
       // Set literals require Dart 2.2. Alternatively, use `Set<String> _kIds = <String>['product1', 'product2'].toSet()`.
       const Set<String> _kIds = {'point_1000'};
       final ProductDetailsResponse response =
-      await InAppPurchaseConnection.instance.queryProductDetails(_kIds);
+          await InAppPurchaseConnection.instance.queryProductDetails(_kIds);
       if (response.notFoundIDs.isNotEmpty) {
         Fluttertoast.showToast(
           msg:
-          "Maalesef satın alma kimliği bulunamadı. Daha sonra tekrar deneyebilirsiniz.",
+              "Maalesef satın alma kimliği bulunamadı. Daha sonra tekrar deneyebilirsiniz.",
           toastLength: Toast.LENGTH_LONG,
           timeInSecForIosWeb: 3,
         );
@@ -597,7 +657,7 @@ class _DashboardState extends State<Dashboard> {
     final bool available = await InAppPurchaseConnection.instance.isAvailable();
     const Set<String> _kIds = {'5000_point'};
     final ProductDetailsResponse response =
-    await InAppPurchaseConnection.instance.queryProductDetails(_kIds);
+        await InAppPurchaseConnection.instance.queryProductDetails(_kIds);
     List<ProductDetails> products = response.productDetails;
     for (ProductDetails p in products.take(1)) {
       print(p.title);
@@ -617,7 +677,7 @@ class _DashboardState extends State<Dashboard> {
     if (!available) {
       Fluttertoast.showToast(
         msg:
-        "Maalesef satın alma aktif değil. Daha sonra tekrar deneyebilirsiniz.",
+            "Maalesef satın alma aktif değil. Daha sonra tekrar deneyebilirsiniz.",
         toastLength: Toast.LENGTH_LONG,
         timeInSecForIosWeb: 3,
       );
@@ -627,11 +687,11 @@ class _DashboardState extends State<Dashboard> {
       // Set literals require Dart 2.2. Alternatively, use `Set<String> _kIds = <String>['product1', 'product2'].toSet()`.
       const Set<String> _kIds = {'5000_point'};
       final ProductDetailsResponse response =
-      await InAppPurchaseConnection.instance.queryProductDetails(_kIds);
+          await InAppPurchaseConnection.instance.queryProductDetails(_kIds);
       if (response.notFoundIDs.isNotEmpty) {
         Fluttertoast.showToast(
           msg:
-          "Maalesef satın alma kimliği bulunamadı. Daha sonra tekrar deneyebilirsiniz.",
+              "Maalesef satın alma kimliği bulunamadı. Daha sonra tekrar deneyebilirsiniz.",
           toastLength: Toast.LENGTH_LONG,
           timeInSecForIosWeb: 3,
         );
@@ -723,7 +783,7 @@ class _DashboardState extends State<Dashboard> {
           if (p.error.message == "BillingResponse.itemAlreadyOwned") {
             Fluttertoast.showToast(
               msg:
-              "Teşekkür ederiz. Krediler profinize tanımlandı istediğiniz zaman kullanabilirsiniz.",
+                  "Teşekkür ederiz. Krediler profinize tanımlandı istediğiniz zaman kullanabilirsiniz.",
               toastLength: Toast.LENGTH_LONG,
               timeInSecForIosWeb: 3,
             );
@@ -740,9 +800,8 @@ class _DashboardState extends State<Dashboard> {
 // Siparişi veritabanına kaydedecek.
 
   Future veriOku() async {
-    DocumentReference veriyolu = Firestore.instance
-        .collection("Uyeler")
-        .document(widget._kullanici.uid);
+    DocumentReference veriyolu =
+        Firestore.instance.collection("Uyeler").document(widget._kullanici.uid);
 
     veriyolu.get().then((alinanveri) {
       if (alinanveri.data()["kredi"] != null) {
@@ -756,9 +815,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> veriGuncelle() async {
-    DocumentReference veriyolu = Firestore.instance
-        .collection("Uyeler")
-        .document(widget._kullanici.uid);
+    DocumentReference veriyolu =
+        Firestore.instance.collection("Uyeler").document(widget._kullanici.uid);
 
     Map<String, dynamic> urunler = {
       "kredi": widget._kredi,
@@ -771,50 +829,49 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> siparisYolla(
       int deger, String gonderilen, int odenecek_kredi, String urun_adi) async {
-    DocumentReference veriyolu = Firestore.instance
-        .collection("Siparisler").doc();
+    DocumentReference veriyolu =
+        Firestore.instance.collection("Siparisler").doc();
 
     DocumentSnapshot doc = await veriyolu.get();
     //List siparislerim = doc.data()["siparisler"];
 
-
-
     Map<String, dynamic> siparisler = {
-      "siparis_veren" : widget._kullanici.uid,
-      "id" : 111,
-      "siparis_tarihi" : DateTime.now().day.toString() + "/" + DateTime.now().month.toString() + "/"+  DateTime.now().year.toString() + " " + DateTime.now().hour.toString() + ":" + DateTime.now().minute.toString(),
-      "siparis_aciklamasi" :  urun_adi,
+      "siparis_veren": widget._kullanici.uid,
+      "id": 111,
+      "siparis_tarihi": DateTime.now().day.toString() +
+          "/" +
+          DateTime.now().month.toString() +
+          "/" +
+          DateTime.now().year.toString() +
+          " " +
+          DateTime.now().hour.toString() +
+          ":" +
+          DateTime.now().minute.toString(),
+      "siparis_aciklamasi": urun_adi,
       "siparisadi": gonderilen,
       "kredisi": odenecek_kredi,
       "tamamlandi": false,
-      "timeStamp" : DateTime.now(),
+      "timeStamp": DateTime.now(),
     };
 
     Map<String, dynamic> urunler = {
       "adi": widget._kullanici.uid,
       "newuser": true,
-      "ziparisler" : siparisler,
+      "ziparisler": siparisler,
     };
     setState(() {
       widget._kredi = widget._kredi - odenecek_kredi;
     });
 
-    Map<String, dynamic> meyve = {
-      "adi" : "elma"
-
-    };
-
+    Map<String, dynamic> meyve = {"adi": "elma"};
 
     veriGuncelle();
 
     veriOku();
 
-
-   await veriyolu.setData(siparisler)
-
-   .whenComplete(() {
-     debugPrint("Kredi güncelleme işlemi başarılı");
-   });
+    await veriyolu.setData(siparisler).whenComplete(() {
+      debugPrint("Kredi güncelleme işlemi başarılı");
+    });
   }
 
   Future<void> logout() async {
@@ -822,12 +879,7 @@ class _DashboardState extends State<Dashboard> {
     await FirebaseAuth.instance.signOut();
     await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
-          return MyApp();
-        }));
+      return MyApp();
+    }));
   }
-
-
-
-
-
 }
